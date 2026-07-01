@@ -20,5 +20,5 @@ skills-lock.json
 unpacked_d/
 unpacked_toc/
 
-# 临时文本提取
-reports/d_report_text.txt
+# 报告文档（含个人信息，不开源）
+reports/
