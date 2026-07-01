@@ -75,7 +75,6 @@ g++ -o WareHouse.exe main.cpp Menu.cpp WarehouseSystem.cpp \
 ├── MyWareHouse.dev       # Dev-C++ 项目文件
 ├── BUILD_GUIDE.md        # 从零搭建指南
 ├── TEAM_PLAN.md          # 团队分工方案
-├── reports/              # 设计文档 & 流程图
 └── LICENSE               # MIT
 ```
 
