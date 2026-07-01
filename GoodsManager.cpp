@@ -79,7 +79,7 @@ int GM_Count(SqList &L)
 }
 
 // ========== GM_DisplayAll ==========
-// 不调 SqList 的 DispList（它只认 int），而是自己按 Goods 字段排版
+// 不调 SqList 的 DispList，而是自己按 Goods 字段排版
 void GM_DisplayAll(SqList &L)
 {
     if (L.length == 0)

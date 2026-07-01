@@ -112,7 +112,7 @@ void WS_QueryById(WarehouseSystem &ws, int id)
 // ========== WS_BrowseByCategory ==========
 void WS_BrowseByCategory(WarehouseSystem &ws)
 {
-    CT_DisplayByCategory(ws.catTree);
+    CT_DisplayByCategory(ws.catTree,ws.goodsList);
 }
 
 // ========== WS_ShowCategoryStats ==========

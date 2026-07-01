@@ -10,7 +10,7 @@
  * ============================================================
  */
 
-int main(int argc, char** argv)
+int main(int argc, char **argv)
 {
     Menu_Run();
     return 0;

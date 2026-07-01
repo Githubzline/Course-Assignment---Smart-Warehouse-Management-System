@@ -3,7 +3,7 @@
 
 #include "Common.h"
 #include "Goods.h"
-
+#include "SqList.h"
 /*
  * ============================================================
  * CategoryTree.h — 类别二叉树索引（PPT 第8章 BST 设计）
@@ -74,9 +74,10 @@ void CT_InsertGoods(CategoryTree &ct, int catIdx, int goodsId);
 int  CT_RemoveGoods(CategoryTree &ct, int catIdx, int goodsId);
 
 // 中序遍历 BST，按字典序列所有类别（需要一个 SqList 来查货物详情）
-void CT_DisplayByCategory(CategoryTree &ct);
+void CT_DisplayByCategory(CategoryTree &ct, SqList &goodsList);
 
 // 各类别统计：种类数 + 总库存
-void CT_DisplayStats(CategoryTree &ct);
+void CT_DisplayStats(CategoryTree &ct); 
+
 
 #endif

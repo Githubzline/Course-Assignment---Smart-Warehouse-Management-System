@@ -27,15 +27,15 @@ typedef struct {
 // 初始化三个数据结构：清空数据 + 加载 Demo 地图
 void WS_Init(WarehouseSystem &ws);
 
-// 销毁所有动态内存（BST 节点 + 图）
+// 销毁所有动态内存
 void WS_Destroy(WarehouseSystem &ws);
 
-// 入库：① 顺序表添加 ② 类别树同步（新建类别 + 追加 ID）
-// 返回 1=成功，0=失败（ID 重复或表满）
+// 入库： 顺序表添加  类别树同步
+// 返回 1=成功，0=失败（
 int  WS_AddGoods(WarehouseSystem &ws, Goods g);
 
-// 出库：① 类别树解关联 ② 顺序表删除
-// 返回 1=成功，0=失败（未找到）
+// 出库：类别树解关联 顺序表删除
+// 返回 1=成功，0=失败
 int  WS_DeleteGoods(WarehouseSystem &ws, int id);
 
 // 修改货物：如果类别变了，先在旧类别树移除，再在新类别添加

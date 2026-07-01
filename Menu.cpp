@@ -20,7 +20,7 @@ static int ReadInt()
 {
     int val;
     scanf("%d", &val);
-    while (getchar() != '\n');   // 清掉缓冲区残余
+    while (getchar() != '\n');   
     return val;
 }
 
@@ -38,11 +38,11 @@ static void ShowMenu()
     printf("  +------------------------------------------+\n");
     printf("  |        智能仓储管理系统 v1.0             |\n");
     printf("  +------------------------------------------+\n");
-    printf("  |  1. 入库货物       6. 按类别浏览         |\n");
-    printf("  |  2. 出库货物       7. 类别统计           |\n");
-    printf("  |  3. 查询货物       8. 最短搬运路径       |\n");
-    printf("  |  4. 修改货物       9. 加载 Demo 数据     |\n");
-    printf("  |  5. 全部货物      10. 显示布局图         |\n");
+    printf("  |  1. 添加货物       6. 分类浏览         |\n");
+    printf("  |  2. 删除货物       7. 最短搬运路径     |\n");
+    printf("  |  3. 查询货物       8. 加载 Demo 数据   |\n");
+    printf("  |  4. 修改货物       9. 显示仓库图       |\n");
+    printf("  |  5. 全部货物                           |\n");
     printf("  |                    0. 保存并退出         |\n");
     printf("  +------------------------------------------+\n");
     printf("  请选择: ");
@@ -57,7 +57,12 @@ static void DoAdd()
     printf("  名称: "); ReadStr(g.name, MAX_NAME);
     printf("  类别: "); ReadStr(g.category, MAX_NAME);
     printf("  货位: "); ReadStr(g.location, MAX_LOC);
-    printf("  数量: "); g.quantity = ReadInt();
+    printf("  数量: ");
+    g.quantity = ReadInt();
+    while (g.quantity < 0) {
+        printf("  [X] 数量不能为负数，请重新输入: ");
+        g.quantity = ReadInt();
+    }
     printf("  入库日期(YYYY-MM-DD): "); ReadStr(g.entryDate, MAX_DATE);
 
     if (WS_AddGoods(ws, g))
@@ -99,7 +104,12 @@ static void DoUpdate()
     printf("  新名称: ");   ReadStr(gNew.name, MAX_NAME);
     printf("  新类别: ");   ReadStr(gNew.category, MAX_NAME);
     printf("  新货位: ");   ReadStr(gNew.location, MAX_LOC);
-    printf("  新数量: ");   gNew.quantity = ReadInt();
+    printf("  新数量: ");
+    gNew.quantity = ReadInt();
+    while (gNew.quantity < 0) {
+        printf("  [X] 数量不能为负数，请重新输入: ");
+        gNew.quantity = ReadInt();
+    }
     printf("  新日期: ");   ReadStr(gNew.entryDate, MAX_DATE);
     gNew.id = id;  // 默认不改编号
 
@@ -120,14 +130,7 @@ static void DoBrowseByCat()
 {
     WS_BrowseByCategory(ws);
 }
-
-// ========== 7. 类别统计 ==========
-static void DoCategoryStats()
-{
-    WS_ShowCategoryStats(ws);
-}
-
-// ========== 8. 最短路径 + ASCII 地图 ==========
+// ========== 7. 最短路径 +  地图 ========== 
 static void DoShortestPath()
 {
     printf("\n  >> 最短搬运路径 <<\n");
@@ -150,13 +153,13 @@ static void DoShortestPath()
     }
 }
 
-// ========== 9. 加载 Demo ==========
+// ========== 8. 加载 Demo ==========
 static void DoLoadDemo()
 {
     WS_LoadDemo(ws);
 }
 
-// ========== 10. 显示邻接矩阵 ==========
+// ========== 9. 显示邻接矩阵 ==========
 static void DoShowGraph()
 {
     printf("\n  >> 仓库布局邻接矩阵 <<\n");
@@ -194,10 +197,9 @@ void Menu_Run()
             case 4:  DoUpdate();        break;
             case 5:  DoDisplayAll();    break;
             case 6:  DoBrowseByCat();   break;
-            case 7:  DoCategoryStats(); break;
-            case 8:  DoShortestPath();  break;
-            case 9:  DoLoadDemo();      break;
-            case 10: DoShowGraph();     break;
+            case 7:  DoShortestPath();  break;
+            case 8:  DoLoadDemo();      break;
+            case 9: DoShowGraph();     break;
             case 0:
                 printf("\n  正在保存数据...\n");
                 FM_Save(ws);

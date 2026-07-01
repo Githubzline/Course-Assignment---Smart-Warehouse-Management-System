@@ -2,7 +2,7 @@
 #include <cstdlib>
 #include <cstdio>
 #include "CategoryTree.h"
-
+#include "GoodsManager.h"
 /*
  * ============================================================
  * CategoryTree.cpp —— 类别 BST 索引实现
@@ -140,18 +140,26 @@ int CT_RemoveGoods(CategoryTree &ct, int catIdx, int goodsId)
 
 // ========== CT_DisplayByCategory ==========
 // 中序遍历 BST，按字典序列打印所有类别
-static void InOrderDisp(BSTNode *p, CategoryTree &ct)
+static void InOrderDisp(BSTNode *p, CategoryTree &ct, SqList &goodsList)
 {
     if (p == NULL) return;
-    InOrderDisp(p->lchild, ct);
-    printf("  [%s] %d kinds\n", ct.cats[p->idx].name, ct.cats[p->idx].goodsCount);
-    InOrderDisp(p->rchild, ct);
+    InOrderDisp(p->lchild, ct, goodsList);
+    CategoryNode &cat = ct.cats[p->idx];
+  	printf("  [%s] %d 种:\n", cat.name, cat.goodsCount);
+  	for (int i = 0; i < cat.goodsCount; i++) {
+      Goods g;
+      if (GM_GetId(goodsList, cat.goodsIds[i], g)) {
+          printf("    ID:%-5d %-12s 位置:%-6s 数量:%-5d 日期:%s\n",
+                 g.id, g.name, g.location, g.quantity, g.entryDate);
+      }
+  	}
+    InOrderDisp(p->rchild, ct, goodsList);
 }
 
-void CT_DisplayByCategory(CategoryTree &ct)
+void CT_DisplayByCategory(CategoryTree &ct, SqList &goodsList)
 {
     printf("\n========== 按类别浏览货物 ==========\n");
-    InOrderDisp(ct.root, ct);
+    InOrderDisp(ct.root, ct ,goodsList);
 }
 
 // ========== CT_DisplayStats ==========

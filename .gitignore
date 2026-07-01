@@ -1,4 +1,24 @@
+# 编译产物
 *.o
 *.exe
+
+# 运行时数据
+*.dat
+
+# Dev-C++ IDE 布局文件
+*.layout
+
+# Office 临时文件
 ~$*.docx
-warehouse.dat
+
+# Claude Code / AI 辅助工具
+.agents/
+.claude/
+skills-lock.json
+
+# 临时解包目录
+unpacked_d/
+unpacked_toc/
+
+# 临时文本提取
+reports/d_report_text.txt
